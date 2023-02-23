@@ -6,9 +6,11 @@ func wordBreak(_ s: String, _ wordDict: [String]) -> Bool {
     
     table[0] = true
     
-    for i in table.indices where i > 0 {
+    for i in s.indices {
+        var word = ""
         for j in s.indices where j >= i {
-            table[i] = table[i] || (words.contains(String(s[i...j])) && table[i - 1])
+            word.append(s[j])
+            table[j + 1] = table[j + 1] || (words.contains(word) && table[i])
         }
     }
     
